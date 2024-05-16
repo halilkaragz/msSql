@@ -1,0 +1,18 @@
+-- Geçici bir tablo oluştur
+CREATE TABLE #GeciciTablo (
+    UrunAdi NVARCHAR(50),
+    SatisAdeti INT
+);
+
+-- Ürünler tablosundan ürün adı ve satış adetlerini seçip geçici tabloya ekle
+INSERT INTO #GeciciTablo (UrunAdi, SatisAdeti)
+SELECT U.UrunAdi, SUM(S.SatisAdeti) AS SatisAdeti
+FROM Urunler U
+INNER JOIN Satislar S ON U.UrunID = S.UrunID
+GROUP BY U.UrunAdi;
+
+-- Geçici tablodan verileri seç
+SELECT * FROM #GeciciTablo;
+
+-- Geçici tabloyu temizle (Opsiyonel, işiniz bittiğinde temizlemeniz önerilir)
+DROP TABLE #GeciciTablo;
