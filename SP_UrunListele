@@ -1,0 +1,6 @@
+CREATE PROCEDURE UrunListele
+    @UrunAdiAra NVARCHAR(50)
+AS
+BEGIN
+    SELECT * FROM Urunler WHERE UrunAdi LIKE '%' + @UrunAdiAra + '%';
+END;
