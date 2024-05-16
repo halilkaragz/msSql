@@ -1,0 +1,9 @@
+CREATE PROCEDURE UrunEkle
+    @UrunAdi NVARCHAR(50),
+    @Fiyat DECIMAL(10, 2),
+    @StokMiktari INT
+AS
+BEGIN
+    INSERT INTO Urunler (UrunAdi, Fiyat, StokMiktari)
+    VALUES (@UrunAdi, @Fiyat, @StokMiktari);
+END;
