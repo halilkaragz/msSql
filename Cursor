@@ -1,0 +1,17 @@
+DECLARE @UrunAdi NVARCHAR(50);
+DECLARE @Fiyat DECIMAL(10, 2);
+
+DECLARE UrunCursor CURSOR FOR
+SELECT UrunAdi, Fiyat FROM Urunler;
+
+OPEN UrunCursor;
+
+FETCH NEXT FROM UrunCursor INTO @UrunAdi, @Fiyat;
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    PRINT 'Ürün Adı: ' + @UrunAdi + ', Fiyat: ' + CONVERT(NVARCHAR(50), @Fiyat);
+    FETCH NEXT FROM UrunCursor INTO @UrunAdi, @Fiyat;
+END;
+
+CLOSE UrunCursor;
+DEALLOCATE UrunCursor;
